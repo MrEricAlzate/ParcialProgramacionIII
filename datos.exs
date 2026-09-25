@@ -36,38 +36,38 @@ defmodule Datos do
 
   def entregas do
     [
-      # Error en el dia
-      %{productor: "P04", Tanque: "T2", dia: 8, litros: 500, grasa: 3.5},
+
+      %{productor: "P04", Tanque: "T2", dia: 8, litros: 500, grasa: 3.5},# Error en el dia
       %{productor: "P03", Tanque: "T1", dia: 6, litros: 790, grasa: 1.3},
-      # Error en los litros
-      %{productor: "P01", Tanque: "T1", dia: 3, litros: 950, grasa: 4.2},
+
+      %{productor: "P01", Tanque: "T1", dia: 3, litros: 950, grasa: 4.2},# Error en los litros
       %{productor: "P09", Tanque: "T1", dia: 5, litros: 350, grasa: 10.7},
-      # Error en la grasa
-      %{productor: "P07", Tanque: "T3", dia: 5, litros: 300, grasa: 18.5},
+
+      %{productor: "P07", Tanque: "T3", dia: 5, litros: 300, grasa: 18.5},# Error en la grasa
       %{productor: "P01", Tanque: "T2", dia: 6, litros: 640, grasa: 5.1},
-      # Error en el dia
-      %{productor: "P03", Tanque: "T2", dia: 0, litros: 450, grasa: 3.0},
+
+      %{productor: "P03", Tanque: "T2", dia: 0, litros: 450, grasa: 3.0},# Error en el dia
       %{productor: "P02", Tanque: "T3", dia: 3, litros: 430, grasa: 12.1},
-      # Error en el productor
-      %{productor: "P12", Tanque: "T3", dia: 5, litros: 250, grasa: 4.0},
+
+      %{productor: "P12", Tanque: "T3", dia: 5, litros: 250, grasa: 4.0}, # Error en el productor
       %{productor: "P11", Tanque: "T3", dia: 5, litros: 340, grasa: 10.6},
-      # Error en el productor
-      %{productor: "P99", Tanque: "T1", dia: 2, litros: 400, grasa: 3.5},
+
+      %{productor: "P99", Tanque: "T1", dia: 2, litros: 400, grasa: 3.5},# Error en el productor
       %{productor: "P02", Tanque: "T4", dia: 3, litros: 680, grasa: 9.5},
       %{productor: "P06", Tanque: "T2", dia: 3, litros: 550, grasa: 3.1},
-      # Error en los litros
-      %{productor: "P04", Tanque: "T1", dia: 2, litros: 0, grasa: 3.8},
+
+      %{productor: "P04", Tanque: "T1", dia: 2, litros: 0, grasa: 3.8}, # Error en los litros
       %{productor: "P04", Tanque: "T2", dia: 4, litros: 580, grasa: 4.0},
-      # Error en la grasa
-      %{productor: "P06", Tanque: "T2", dia: 3, litros: 500, grasa: -0.5},
+
+      %{productor: "P06", Tanque: "T2", dia: 3, litros: 500, grasa: -0.5},# Error en la grasa
       %{productor: "P01", Tanque: "T2", dia: 1, litros: 500, grasa: 6.0},
       %{productor: "P02", Tanque: "T2", dia: 5, litros: 500, grasa: 3.2},
       %{productor: "P08", Tanque: "T4", dia: 6, litros: 680, grasa: 2.1},
       %{productor: "P03", Tanque: "T2", dia: 6, litros: 780, grasa: 3.9},
-      # Error en el tanque
-      %{productor: "P02", Tanque: "T5", dia: 1, litros: 300, grasa: 3.2},
-      # Error en el tanque
-      %{productor: "P08", Tanque: "T8", dia: 4, litros: 550, grasa: 2.1},
+
+      %{productor: "P02", Tanque: "T5", dia: 1, litros: 300, grasa: 3.2},# Error en el tanque
+
+      %{productor: "P08", Tanque: "T8", dia: 4, litros: 550, grasa: 2.1}, # Error en el tanque
       %{productor: "P03", Tanque: "T2", dia: 6, litros: 640, grasa: 8.9},
       %{productor: "P07", Tanque: "T4", dia: 5, litros: 690, grasa: 7.9},
       %{productor: "P09", Tanque: "T1", dia: 6, litros: 240, grasa: 10.2},

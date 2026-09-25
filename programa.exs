@@ -6,6 +6,9 @@
 # - Eric Santiago Correa Alzate
 # - Juan José Marín
 
+Code.require_file("datos.exs", __DIR__)
+Code.require_file("validaciones.exs", __DIR__)
+
 defmodule Programa do
   def main do
     """
@@ -27,6 +30,7 @@ defmodule Programa do
       "1" -> :productores
       "2" -> :tanques
       "3" -> :entregas
+      "4" -> :validar
       _ -> :opcion_invalida
     end
   end
@@ -44,15 +48,17 @@ defmodule Programa do
   end
 
   def ejecutar_opcion(:entregas) do
-    Datos.tanques()
-    |> generar_lista_tanques()
+    Datos.entregas()
+    |> generar_lista_entregas()
     |> Util.mostrar_mensaje()
   end
 
-  # def validar_entregas(:validar_entregas) do
-  #   "Entregas validas en la lista datos.exs"
-  #   |>validar()
-  #   |>Util.mostrar_mensaje()
+  def ejecutar_opcion(:validar) do
+    Datos.entregas()
+    |> Validaciones.validar_entregas()
+    |> generar_reporte_validacion()
+    |> Util.mostrar_mensaje()
+end
 
   defp generar_lista_productores(productores) do
     contenido =
@@ -85,13 +91,31 @@ defmodule Programa do
       entregas
       |> Enum.map(
         fn e ->
-          "Dia #{e.dia}, Productor #{e.productor}, Tanque #{e[:Tanque]}, #{e.litros} L, Grasa: #{e.grasa}"
+          "Dia #{e.dia}, Productor #{e.productor}, Tanque #{e.tanque}, #{e.litros} L, Grasa: #{e.grasa}"
         end)
 
         |> Enum.join("\n")
 
     "\n Lista de entregas: \n" <> contenido
   end
+
+  defp generar_reporte_validacion(resultados) do
+    validas = Validaciones.entregas_validas(resultados)
+    rechazadas = Validaciones.entregas_rechazadas(resultados)
+
+    texto_validas =
+      validas
+      |> Enum.map(fn e -> "OK -> #{e.productor}, Tanque #{e.tanque}, Día #{e.dia}, #{e.litros} L, Grasa #{e.grasa}%" end)
+      |> Enum.join("\n")
+
+    texto_rechazadas =
+      rechazadas
+      |> Enum.map(fn {e, motivo} -> "RECHAZADA (#{motivo}) -> #{inspect(e)}" end)
+      |> Enum.join("\n")
+
+    "\n Entregas válidas (#{length(validas)}):\n" <> texto_validas <>
+    "\n\n Entregas rechazadas (#{length(rechazadas)}):\n" <> texto_rechazadas
+end
 
   # def ejecutar_opcion(:productores) do
   #   IO.puts("\n Lista de Proovedores")

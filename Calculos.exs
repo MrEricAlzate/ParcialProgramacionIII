@@ -9,29 +9,23 @@
 # ACA SE HACEN LOS CALCULOS DE VALOR, BONIFICACION Y TRANSPORTE
 
 defmodule Calculos do
-  # Parámetros del enunciado, como atributos de módulo
   @tarifa_base 1800
   @litros_bonificacion 450
   @monto_bonificacion 25_000
   @costo_transporte 18_000
 
-  # Valor de una entrega: litros * tarifa base, ajustado según el % de grasa.
-  # Se redondea a entero porque son pesos colombianos (sin decimales).
   def valor_entrega(entrega) do
-    base = entrega.litros * @tarifa_base
+    base = entrega.litros * @tarifa_base # Valor de una entrega litros * tarifa base, ajustado segun el % de grasa
 
-    valor =
-      cond do
-        entrega.grasa >= 3.5 -> base * 1.06
-        entrega.grasa >= 3.0 -> base
-        entrega.grasa >= 2.5 -> base * 0.92
-        true -> base * 0.80
-      end
-
-    round(valor)
+    cond do
+      entrega.grasa >= 3.5 -> base * 1.06
+      entrega.grasa >= 3.0 -> base
+      entrega.grasa >= 2.5 -> base * 0.92
+      true -> base * 0.80
+    end
   end
 
-  # Suma de litros de un productor, en un día, usando solo entregas válidas
+  # Suma de litros de un productor, en un da, usando solo entregas válidas
   def litros_productor_dia(codigo, dia, entregas_validas) do
     entregas_validas
     |> Enum.filter(fn e -> e.productor == codigo and e.dia == dia end)

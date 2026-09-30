@@ -7,6 +7,8 @@
 #- Juan José Marín
 
 defmodule Datos do
+  @moduledoc "Datos de prueba para los reportes del centro de acopio."
+  @doc "Devuelve la lista de productores."
   def productores do
     [
       %{codigo: "P01", nombre: "Marta Gómez", transporte: true},
@@ -23,6 +25,7 @@ defmodule Datos do
     ]
   end
 
+  @doc "Lista los tanques y sus capacidades."
   def tanques do
     [
       %{id: "T1", nombre: "Tanque Norte", capacidad: 4000},
@@ -34,6 +37,7 @@ defmodule Datos do
 
   # Para fines practicos los errores se colocaron en la parte de arriba el resto que no esta comentado son entregas validas
 
+  @doc "Lista las entregas de prueba, incluidas las invalidas para comprobar rechazos."
   def entregas do
     [
 
@@ -116,7 +120,18 @@ defmodule Datos do
       %{productor: "P04", tanque: "T2", dia: 2, litros: 620, grasa: 0.4},
       %{productor: "P06", tanque: "T4", dia: 6, litros: 410, grasa: 4.0},
       %{productor: "P02", tanque: "T4", dia: 1, litros: 700, grasa: 3.3},
-      %{productor: "P08", tanque: "T3", dia: 3, litros: 390, grasa: 3.3}
+      %{productor: "P08", tanque: "T3", dia: 3, litros: 390, grasa: 3.3},
+      %{productor: "P01", tanque: "T1", dia: 1, litros: 80, grasa: 3.4},
+      %{productor: "P01", tanque: "T2", dia: 2, litros: 80, grasa: 3.6},
+      %{productor: "P01", tanque: "T3", dia: 3, litros: 80, grasa: 3.1},
+      %{productor: "P01", tanque: "T4", dia: 4, litros: 80, grasa: 2.8},
+      %{productor: "P02", tanque: "T1", dia: 2, litros: 90, grasa: 3.4},
+      %{productor: "P03", tanque: "T2", dia: 3, litros: 90, grasa: 3.6},
+      %{productor: "P04", tanque: "T3", dia: 4, litros: 90, grasa: 3.1},
+      %{productor: "P05", tanque: "T4", dia: 5, litros: 90, grasa: 2.8},
+      %{productor: "P06", tanque: "T1", dia: 6, litros: 90, grasa: 3.4},
+      %{productor: "P07", tanque: "T2", dia: 1, litros: 90, grasa: 3.6},
+      %{productor: "P08", tanque: "T3", dia: 2, litros: 90, grasa: 3.1}
     ]
   end
 end

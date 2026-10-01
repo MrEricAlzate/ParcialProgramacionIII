@@ -1,5 +1,5 @@
 # Universidad del Quindio - Programacion III
-# Integrantes: Eric Santiago Correa Alzate y Juan Jose Marin
+# Integrantes: Eric Santiago Correa Alzate, Juan Jose Marin y Nicolay Ramirez Ramirez
 
 defmodule Calculos do
   @moduledoc "Funciones sencillas para liquidar entregas y resumir datos del centro."

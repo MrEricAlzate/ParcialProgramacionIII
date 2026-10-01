@@ -1,5 +1,5 @@
 # Universidad del Quindio - Programacion III
-# Integrantes: Eric Santiago Correa Alzate y Juan Jose Marin
+# Integrantes: Eric Santiago Correa Alzate,Juan Jose Marin y Nicolay Ramirez Ramirez
 
 Code.require_file("datos.exs", __DIR__)
 Code.require_file("Validaciones.exs", __DIR__)
@@ -76,7 +76,9 @@ defmodule Programa do
     end)
   end
 
-  @doc "Valida los registros, pide una entrega opcional y genera todos los reportes."
+  @doc "Valida los registros, pide una entrega opcional y genera todos los reportes.
+  ademas de mostrar el tiempo de este proceso de validacion en microsegundos.
+  "
   def ejecutar_liquidacion do
     IO.puts("\nRevisando las entregas y preparando los reportes...")
     {microsegundos, resultados} = :timer.tc(fn -> Validaciones.validar_entregas(Datos.entregas()) end)
@@ -200,20 +202,56 @@ defmodule Programa do
     IO.puts("Primer lugar mas dias: #{Enum.map(lideres, fn p -> p.nombre end) |> Enum.join(", ")} (#{max_dias} dias)")
   end
 
-  @doc "Encuentra la mejor grasa ponderada entre productores con tres entregas o mas."
-  def reporte_r6(entregas) do
-    candidatos = Enum.map(Datos.productores(), fn p ->
-      propias = Enum.filter(entregas, fn e -> e.productor == p.codigo end)
-      litros = Enum.map(propias, fn e -> e.litros end) |> Enum.sum()
-      ponderado = if litros == 0, do: 0, else: Enum.map(propias, fn e -> e.grasa * e.litros end) |> Enum.sum() / litros
-      %{productor: p, cantidad: length(propias), ponderado: ponderado}
-    end) |> Enum.filter(fn p -> p.cantidad >= 3 end)
-    encabezado("R6 - Mejor calidad (grasa ponderada)")
-    case candidatos do
-      [] -> IO.puts("No hay productores con al menos tres entregas validas.")
-      _ -> mejor = Enum.max_by(candidatos, fn p -> p.ponderado end); IO.puts("#{mejor.productor.nombre} (#{mejor.productor.codigo}): #{Float.round(mejor.ponderado, 3)}% con #{mejor.cantidad} entregas.")
-    end
+ @doc """
+Calcula la calidad promedio ponderada de cada productor utilizando
+la fórmula exigida por el enunciado:
+
+suma(grasa * litros) / suma(litros)
+
+Solo participan los productores con tres o más entregas válidas.
+Al final muestra el productor con el mayor porcentaje de grasa
+ponderado.
+"""
+def reporte_r6(entregas) do
+  candidatos =
+    Enum.map(Datos.productores(), fn p ->
+      propias =
+        Enum.filter(entregas, fn e ->
+          e.productor == p.codigo
+        end)
+      litros =
+        Enum.map(propias, fn e ->
+          e.litros
+        end)
+        |> Enum.sum()
+      ponderado =
+        if litros == 0 do
+          0
+        else
+          suma_ponderada =
+            propias
+            |> Enum.map(fn e -> e.grasa * e.litros end)
+            |> Enum.sum()
+          suma_ponderada / litros
+        end
+      %{
+        productor: p,
+        cantidad: length(propias),
+        ponderado: ponderado
+      }
+    end)
+    |> Enum.filter(fn p -> p.cantidad >= 3 end)
+  encabezado("R6 - Mejor calidad (grasa ponderada)")
+  case candidatos do
+    [] ->
+      IO.puts("No hay productores con al menos tres entregas validas.")
+    _ ->
+      mejor = Enum.max_by(candidatos, fn p -> p.ponderado end)
+      IO.puts(
+        "#{mejor.productor.nombre} (#{mejor.productor.codigo}): #{Float.round(mejor.ponderado, 3)}% con #{mejor.cantidad} entregas."
+      )
   end
+end
 
   @doc "Calcula el total neto pagado y el promedio por litro recibido."
   def reporte_r7(entregas) do
